@@ -20,26 +20,36 @@
 
         <div class="chat-body">
             <div class="message bot-msg">
-                <img src="./chatimage.png" alt="" width="50px" height="50px">
+                <img src="./chatimage.png" class="avatar" alt="" width="50px" height="50px">
                 <div class="msg-text">
                     Hii! <br> How're you doing today?
                 </div>
             </div>
 
-            <div class="msg user-msg">
+            <div class="message user-msg">
+                <div class="msg-text">Lorem ipsum, dolor sit amet consectetur adipisicing. </div>
+            </div>
+
+            <div class="message bot-msg think">
+                <img src="./chatimage.png" class="avatar" alt="" width="50px" height="50px">
                 <div class="msg-text">
-                    Lorem ipsum, dolor sit amet consectetur adipisicing.
+                    <div class="thinking">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                    </div>
                 </div>
             </div>
+            
         </div>
 
         <div class="chat-footer">
             <form class="chat-form" action="">
-                <textarea name="" placeholder="message..." id="" class="msg-input"></textarea>
+                <textarea name="" placeholder="message..." id="" class="msg-input" required></textarea>
                 <div class="chat-controls">
                         <button type="button" class="material-symbols-rounded">sentiment_satisfied</button>
                         <button type="button" class="material-symbols-rounded">attach_file</button>
-                        <button type="submit" class="material-symbols-rounded">arrow_upward</button>
+                        <button type="submit" class="material-symbols-rounded" id="send">arrow_upward</button>
                 </div>
                 
             </form>
