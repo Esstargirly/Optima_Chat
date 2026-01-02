@@ -1,8 +1,9 @@
-import { apiKey } from "./config.js";
+import {apiKey} from "./config.js";
 
 const chatBody = document.querySelector(".chat-body");
 const messageInput = document.querySelector(".msg-input");
 const sendMessageBtn = document.querySelector("#send");
+const chatForm = document.querySelector(".chat-form")
 
 const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`; 
 
@@ -18,25 +19,31 @@ const createMessageElement = (content, ...classes) => {
     return div;
 }
 
+//Generate bot response using APi
 const generateBotResponse = async() => {
     const requestOptions = {
         method: "POST",
         headers: {"Content-Type": "application/json"},
         body: JSON.stringify({
-            contents: [{
+            contents: [
+                {
             parts: [{text: userData.message}]    
-        }]
+        }
+    ]
         })
     };
+
     try{
+        //fetch bot reponse from Api
         const response = await fetch (API_URL, requestOptions);
         const data = await response.json();
-        if (!response.ok) throw new Error (data.error.message);
-        
+        if (!response.ok) 
+            throw new Error (data.error.message);
         console.log(data);
+
     } catch (error){
-        console.log(data);
-    };
+        console.log(error);
+    }
 }
 
 //handle user outgoing message
@@ -69,10 +76,14 @@ const handleOutgoingMessage = (e) => {
 
 messageInput.addEventListener("keydown", (e) => {
     const userMessage = e.target.value.trim();
+    if (!userData.message) return;
     if (e.key === "Enter" && userMessage) {
         handleOutgoingMessage(e);
        // e.target.value = "";
     }
 })
 
-sendMessageBtn.addEventListener("click", (e) => handleOutgoingMessage (e))
+//sendMessageBtn.addEventListener("submit", (e) => handleOutgoingMessage (e));
+chatForm.addEventListener("submit", (e) => {
+    handleOutgoingMessage(e);
+} );
