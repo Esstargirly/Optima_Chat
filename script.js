@@ -5,7 +5,7 @@ const messageInput = document.querySelector(".msg-input");
 const sendMessageBtn = document.querySelector("#send");
 const chatForm = document.querySelector(".chat-form")
 
-const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`; 
+const API_URL = "https://api.mistral.ai/v1/chat/completions";
 
 const userData = {
     message: null
@@ -20,16 +20,20 @@ const createMessageElement = (content, ...classes) => {
 }
 
 //Generate bot response using APi
-const generateBotResponse = async() => {
+const generateBotResponse = async(incomingMessageDiv) => {
+   const messageElement = incomingMessageDiv.querySelector(".msg-text");
+
     const requestOptions = {
         method: "POST",
-        headers: {"Content-Type": "application/json"},
+        headers: {
+            "Authorization": `Bearer ${apiKey}`,
+            "Content-Type": "application/json"
+        },
         body: JSON.stringify({
-            contents: [
-                {
-            parts: [{text: userData.message}]    
-        }
-    ]
+            model: "mistral-small-latest",
+            messages:[
+                { role: "user", content: userData.message}
+            ]
         })
     };
 
@@ -39,10 +43,15 @@ const generateBotResponse = async() => {
         const data = await response.json();
         if (!response.ok) 
             throw new Error (data.error.message);
-        console.log(data);
+
+        //extracting and displaying bot response
+        const apiResponseText = data.choices[0].message.content.trim();
+        messageElement.innerHTML = apiResponseText;
+       // console.log(data);
 
     } catch (error){
-        console.log(error);
+       console.log(error);
+       messageElement.textContent = "Error getting response";
     }
 }
 
@@ -70,7 +79,7 @@ const handleOutgoingMessage = (e) => {
 
     const incomingMessageDiv = createMessageElement(messageContent, "bot-msg", "think");
     chatBody.appendChild(incomingMessageDiv);
-    generateBotResponse();
+    generateBotResponse(incomingMessageDiv);
    }, 600)
 }
 
