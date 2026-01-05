@@ -17,7 +17,7 @@ const userData = {
         mime_type: null
     }
 }
-
+const chatHistory = [];
 const initialInputHeight = messageInput.scrollHeight;
 
 //create message element with dynamic classes and return it
@@ -45,6 +45,12 @@ const generateBotResponse = async(incomingMessageDiv) => {
     });
    }
 
+   //save user message
+   chatHistory.push({
+    role: "user",
+    content: content
+   });
+
     const requestOptions = {
         method: "POST",
         headers: {
@@ -53,11 +59,7 @@ const generateBotResponse = async(incomingMessageDiv) => {
         },
         body: JSON.stringify({
             model: "mistral-small-latest",
-            messages:[
-                { role: "user", 
-                    content
-                }
-            ]
+            messages: chatHistory
         })
     };
 
@@ -72,6 +74,12 @@ const generateBotResponse = async(incomingMessageDiv) => {
         const apiResponseText = data.choices[0].message.content.replace(/\*\*(.*?)\*\*/g, "$1").trim();
         messageElement.innerHTML = apiResponseText;
        // console.log(data);
+
+       //save bot response
+       chatHistory.push({
+        role: "assistant",
+        content: botReply
+       });
 
     } catch (error){
         //handle api response error
