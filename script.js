@@ -18,6 +18,8 @@ const userData = {
     }
 }
 
+const initialInputHeight = messageInput.scrollHeight;
+
 //create message element with dynamic classes and return it
 const createMessageElement = (content, ...classes) => {
     const div = document.createElement("div");
@@ -90,6 +92,7 @@ const handleOutgoingMessage = (e) => {
     userData.message = messageInput.value.trim(); 
     messageInput.value = "";
     fileUpload.classList.remove("file-uploaded");
+    messageInput.dispatchEvent(new Event ("input"));
 
     //create and display user message
     const messageContent = `<div class="msg-text"></div>
@@ -117,14 +120,23 @@ const handleOutgoingMessage = (e) => {
    }, 600)
 }
 
+//handle enter key press for sending messages
 messageInput.addEventListener("keydown", (e) => {
     const userMessage = e.target.value.trim();
     if (!userData.message) return;
-    if (e.key === "Enter" && userMessage) {
+    if (e.key === "Enter" && userMessage && !e.shiftKey && window.innerWidth > 768) {
         handleOutgoingMessage(e);
        // e.target.value = "";
     }
-})
+});
+
+//adjust input height when it's big
+messageInput.addEventListener("input", () => {
+    messageInput.style.height = `${initialInputHeight}px`;
+    messageInput.style.height = `${messageInput.scrollHeight}px`;
+    document.querySelector(".chat-form").style.borderRadius = messageInput.scrollHeight > 
+    initialInputHeight ? "15px" : "32px";
+});
 
 
 //handle file input change and preview
@@ -175,8 +187,8 @@ const picker = new EmojiMart.Picker({
         }
     }
 });
-
     document.querySelector(".chat-form").appendChild(picker);
+
 //sendMessageBtn.addEventListener("submit", (e) => handleOutgoingMessage (e));
 chatForm.addEventListener("submit", (e) => {
     handleOutgoingMessage(e);

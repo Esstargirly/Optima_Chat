@@ -167,10 +167,17 @@ body{
     outline: none;
     height: 50px;
     width: 100%;
+    max-height: 180px;
+    /* white-space: pre-line; */
     font-size: 1rem;
     padding: 14px 0 13px 18px;
     border-radius: inherit;
     resize: none;
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+}
+.chat-form .msg-input:hover{
+    scrollbar-color: #ccccf5 transparent;
 }
 .chat-form .chat-controls{
     display: flex;
@@ -243,7 +250,7 @@ em-emoji-picker{
 }
 body.show-emoji-picker em-emoji-picker{
     visibility: visible;
-    
+
 }
 .material-symbols-rounded {
   font-variation-settings:
