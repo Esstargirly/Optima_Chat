@@ -15,7 +15,7 @@
                 <img src="./chatimage.png" class="logo" alt="" width="50px" height="50px">
                 <h2 class="text-logo">Optima Chat</h2>
             </div>
-            <button type="button" class="material-symbols-rounded" id="close">keyboard_arrow_down</button>
+            <!-- <button type="button" class="material-symbols-rounded" id="close">keyboard_arrow_down</button> -->
         </div>
 
         <div class="chat-body">
@@ -47,10 +47,12 @@
             <form class="chat-form" action="">
                 <textarea name="" placeholder="message..." id="textarea" class="msg-input" required></textarea>
                 <div class="chat-controls">
-                        <button type="button" class="material-symbols-rounded">sentiment_satisfied</button>
+                        <button type="button" id="emoji-picker" class="material-symbols-rounded">sentiment_satisfied</button>
                         <div class="file-upload">
                             <input type="file" accept="images/*" id="file-input" hidden>
+                            <img src="#">
                             <button type="button" id="file" class="material-symbols-rounded">attach_file</button>
+                            <button type="button" id="file-cancel" class="material-symbols-rounded">close</button>
                         </div>
                 
                         <button type="submit" class="material-symbols-rounded" id="send">arrow_upward</button>
@@ -59,6 +61,9 @@
             </form>
         </div>
     </div>
+
+    <!-- emoji script -->
+    <script src="https://cdn.jsdelivr.net/npm/emoji-mart@latest/dist/browser.js"></script>
 
     <script type="module" src="script.js"></script>
 </body>
