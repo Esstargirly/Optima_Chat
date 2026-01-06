@@ -78,7 +78,7 @@ const generateBotResponse = async(incomingMessageDiv) => {
        //save bot response
        chatHistory.push({
         role: "assistant",
-        content: botReply
+        content: content
        });
 
     } catch (error){
