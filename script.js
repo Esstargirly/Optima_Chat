@@ -1,5 +1,3 @@
-import {apiKey} from "./config.js";
-
 const chatBody = document.querySelector(".chat-body");
 const messageInput = document.querySelector(".msg-input");
 const sendMessageBtn = document.querySelector("#send");
@@ -8,7 +6,6 @@ const fileInput = document.querySelector("#file-input");
 const fileUpload = document.querySelector(".file-upload");
 const fileCancelBtn = document.querySelector("#file-cancel")
 
-const API_URL = "https://api.mistral.ai/v1/chat/completions";
 
 const userData = {
     message: null,
@@ -51,41 +48,38 @@ const generateBotResponse = async(incomingMessageDiv) => {
     content: content
    });
 
-    const requestOptions = {
-        method: "POST",
-        headers: {
-            "Authorization": `Bearer ${apiKey}`,
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-            model: "mistral-small-latest",
-            messages: chatHistory
-        })
-    };
-
     try{
         //fetch bot reponse from Api
-        const response = await fetch (API_URL, requestOptions);
+        const response = await fetch ("http://localhost:3000/chat", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                message: chatHistory
+            })
+        });
+
         const data = await response.json();
         if (!response.ok) 
-            throw new Error (data.error.message);
+            throw new Error (data.error || "Unknown error");
 
         //extracting and displaying bot response
-        const apiResponseText = data.choices[0].message.content.replace(/\*\*(.*?)\*\*/g, "$1").trim();
+        const apiResponseText = data.reply.replace(/\*\*(.*?)\*\*/g, "$1").trim();
         messageElement.innerHTML = apiResponseText;
        // console.log(data);
 
        //save bot response
        chatHistory.push({
         role: "assistant",
-        content: content
+        content: [{type: "text", text: apiResponseText}]
        });
 
     } catch (error){
         //handle api response error
-       console.log(error);
+       //console.log(error);
        messageElement.innerText = error.message;
-       messageElement.style.color = "ff0000";
+       messageElement.style.color = "red";
        //messageElement.textContent = "Error getting response";
     } finally{
         userData.file = {};
