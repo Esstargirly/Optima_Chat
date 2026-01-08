@@ -56,7 +56,7 @@ const generateBotResponse = async(incomingMessageDiv) => {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                message: chatHistory
+                messages: chatHistory
             })
         });
 

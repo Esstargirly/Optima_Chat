@@ -13,8 +13,10 @@ const API_URL = "https://api.mistral.ai/v1/chat/completions";
 
 app.post("/chat", async (req, res) => {
     try {
-        const {message} = req.body;
+        const {messages} = req.body;
+        console.log(messages)
 
+        console.log(process.env.apiKey)
         const response = await fetch(API_URL, {
             method: "POST",
             headers: {
@@ -23,10 +25,11 @@ app.post("/chat", async (req, res) => {
             },
             body: JSON.stringify({
                 model: "mistral-small-latest",
-                message
+                messages
             })
         });
         const data = await response.json();
+        console.log(data)
         if (!response.ok) {
             return res.status(500).json({error: data.error?.message});
         }
