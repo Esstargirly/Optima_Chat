@@ -4,7 +4,7 @@ const sendMessageBtn = document.querySelector("#send");
 const chatForm = document.querySelector(".chat-form");
 const fileInput = document.querySelector("#file-input");
 const fileUpload = document.querySelector(".file-upload");
-const fileCancelBtn = document.querySelector("#file-cancel")
+const fileCancelBtn = document.querySelector("#file-cancel");
 
 
 const userData = {

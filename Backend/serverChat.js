@@ -41,7 +41,7 @@ app.post("/chat", async (req, res) => {
         res.status(500).json ({error: "Server Error!"});
     }
 });
-
+//port
 app.listen(3000, () => {
     console.log("Optima is running on http://localhost:3000");
 });
