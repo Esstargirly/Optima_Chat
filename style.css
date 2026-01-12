@@ -259,87 +259,94 @@ body.show-emoji-picker em-emoji-picker{
     'GRAD' 0,
     'opsz' 24;
 }
+/* ========== RESPONSIVE DESIGN ========== */
 
-
-/* Tablets */
-@media (max-width: 768px) {
+/* Small devices (phones) */
+@media (max-width: 576px) {
     body {
         padding: 10px;
     }
-    .chat-popup {
-        width: 100%;
-        max-width: 100%;
-        height: 95vh;
-        border-radius: 8px;
-    }
-    .chat-body {
-        height: calc(95vh - 160px);
-        padding: 15px;
-    }
-    .chat-header .text-logo {
-        font-size: 1.2rem;
-    }
-    .chat-body .message .msg-text {
-        font-size: 0.95rem;
-        max-width: 85%;
-    }
-    .chat-footer {
-        padding: 10px 15px 15px;
-    }
-    em-emoji-picker {
-        max-width: 300px;
-    }
-}
 
-/* Mobile phones */
-@media (max-width: 480px) {
-    body {
-        align-items: flex-start;
-    }
     .chat-popup {
         width: 100%;
         height: 100vh;
         border-radius: 0;
     }
+
     .chat-header {
         padding: 12px 15px;
     }
-    .chat-header .text-logo {
-        font-size: 1.1rem;
+
+    .header .text-logo {
+        font-size: 1.2rem;
     }
-    .chat-header #close {
-        height: 35px;
-        width: 35px;
-        font-size: 1.3rem;
-    }
+
     .chat-body {
+        padding: 15px;
         height: calc(100vh - 150px);
-        padding: 12px;
-        gap: 15px;
+        margin-bottom: 70px;
     }
-    .chat-body .message .avatar {
-        height: 28px;
-        width: 28px;
-    }
+
     .chat-body .message .msg-text {
-        font-size: 0.9rem;
-        padding: 10px 12px;
         max-width: 90%;
+        font-size: 0.9rem;
     }
-    .chat-body .user-msg .attachment {
-        width: 70%;
+
+    .chat-footer {
+        padding: 10px 12px 15px;
     }
+
     .chat-form .msg-input {
         font-size: 0.9rem;
-        padding: 12px 0 11px 14px;
+        padding-left: 14px;
     }
+
     .chat-form .chat-controls button {
-        height: 30px;
-        width: 30px;
+        height: 32px;
+        width: 32px;
         font-size: 1rem;
     }
+
     em-emoji-picker {
+        left: 50%;
         top: -300px;
-        max-width: 260px;
+        width: 90%;
+    }
+}
+
+/* Medium devices (tablets) */
+@media (max-width: 768px) {
+    .chat-popup {
+        width: 90%;
+    }
+
+    .chat-body {
+        height: 420px;
+    }
+
+    .chat-body .message .msg-text {
+        max-width: 85%;
+    }
+}
+
+/* Large devices (laptops and desktops) */
+@media (min-width: 1024px) {
+    .chat-popup {
+        width: 480px;
+    }
+
+    .chat-body {
+        height: 480px;
+    }
+
+    .chat-body .message .msg-text {
+        max-width: 75%;
+    }
+}
+
+/* Extra large screens */
+@media (min-width: 1440px) {
+    .chat-popup {
+        width: 520px;
     }
 }
