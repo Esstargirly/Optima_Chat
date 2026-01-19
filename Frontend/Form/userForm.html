@@ -1,0 +1,51 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="userForm.css">
+</head>
+<body>
+    <div class="wrapper" id="formwrapper">
+        <div class="form-cont login">
+            <h2>Login</h2>
+            <form id="userForm">
+                <input type="email" placeholder="Enter your email" name="Loginemail" id="Loginemail" required>
+                <small class="error" id="loginEmailError"></small>
+
+                <input type="password" placeholder="Enter password" name="Loginassword" id="Loginpassword" required>
+                <small class="error" id="loginPasswordError"></small>
+
+                <div class="forgot-password" tabindex="0">Forgot password?</div>
+                <button type="submit" class="submitbtn">Login</button>
+            
+            </form>
+        </div>
+
+         <div class="form-cont Signup">
+            <h2>Sign Up</h2>
+            <form class="userForm">
+                <input type="text" placeholder="username" name="username" id="username" required>
+                <small class="error" id="usernameError"></small>
+
+                <input type="email" placeholder="Enter your email" name="email" id="email" required>
+                <small class="error" id="signupEmailError"></small>
+
+                <input type="password" placeholder="Enter password" name="password" id="password" required>
+                <small class="error" id="signupPasswordError"></small>
+
+                <label for="" class="accept"> <input type="checkbox" required> I accept the terms & conditions</label>
+                <button type="submit" class="submitbtn">Sign Up</button>
+            </form>
+    </div>
+
+    <div class="toggle-cont">
+        <h2 id="toggleHeading"> Don't have an account?</h2>
+        <p id="toggleText"> Sign up to get started!</p>
+        <button class="switchbtn" id="togglebtn">Sign Up</button>
+    </div>
+    </div>
+
+    <script type="module" src="userForm.js"></script>
+</body>
+</html>

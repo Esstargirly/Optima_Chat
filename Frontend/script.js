@@ -106,7 +106,7 @@ const handleOutgoingMessage = (e) => {
 
    //simulate bot response with thinking indicator
    setTimeout (() => {
-    const messageContent = `<img src="./chatimage.png" class="avatar" alt="" width="50px" height="50px">
+    const messageContent = `<img src="./Images/chatimage.png" class="avatar" alt="" width="50px" height="50px">
                 <div class="msg-text">
                     <div class="thinking">
                         <div class="dot"></div>
