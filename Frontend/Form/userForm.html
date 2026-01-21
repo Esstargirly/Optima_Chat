@@ -9,7 +9,7 @@
     <div class="wrapper" id="formwrapper">
         <div class="form-cont login">
             <h2>Login</h2>
-            <form id="userForm">
+            <form id="loginForm" action="/login">
                 <input type="email" placeholder="Enter your email" name="Loginemail" id="Loginemail" required>
                 <small class="error" id="loginEmailError"></small>
 
@@ -24,7 +24,7 @@
 
          <div class="form-cont Signup">
             <h2>Sign Up</h2>
-            <form class="userForm">
+            <form id="signupForm" action="/signup">
                 <input type="text" placeholder="username" name="username" id="username" required>
                 <small class="error" id="usernameError"></small>
 

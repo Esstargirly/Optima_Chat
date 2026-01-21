@@ -5,6 +5,7 @@
   "type": "module",
   "main": "serverChat.js",
   "scripts": {
+    "dev": "nodemon serverForm.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,10 +20,14 @@
   },
   "homepage": "https://github.com/Esstargirly/Optima_Chat#readme",
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
+    "ejs": "^4.0.1",
     "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.1.4",
+    "mongose": "^0.0.2-security",
     "node-fetch": "^3.3.2"
   },
   "devDependencies": {

@@ -1,8 +1,8 @@
 import { validateUsername, validateEmail, validatePassword } from "./validation.js";
 
 const wrapper = document.getElementById('formwrapper');
-const signUpForm = document.querySelector(".userForm")
-const loginForm = document.getElementById("userForm");
+const signUpForm = document.getElementById("signupForm");
+const loginForm = document.getElementById("loginForm")
 
 const username = document.getElementById("username");
 const email = document.getElementById("email");
@@ -38,41 +38,63 @@ Loginpassword.addEventListener("input", ()=>{
     loginPasswordError.textContent = validatePassword(value)? "" : "Password must be strong";
 });
 
-signUpForm.addEventListener("submit", function (e){
-    e.preventDefault();
+signUpForm.addEventListener("submit", async function (e) {
+  e.preventDefault();
 
-    let valid = true;
+  let valid = true;
 
-    const usernameValue = username.value.trim();
-    const emailValue = email.value.trim();
-    const passwordValue = password.value.trim();
+  const usernameValue = username.value.trim();
+  const emailValue = email.value.trim();
+  const passwordValue = password.value.trim();
 
-    if (!validateUsername (usernameValue)){
-        usernameError.textContent = "Invalid username";
-        valid = false;
+  if (!validateUsername(usernameValue)) {
+    usernameError.textContent = "Invalid username";
+    valid = false;
+  }
+
+  if (!validateEmail(emailValue)) {
+    signupEmailError.textContent = "Invalid email";
+    valid = false;
+  }
+
+  if (!validatePassword(passwordValue)) {
+    signupPasswordError.textContent = "Invalid password";
+    valid = false;
+  }
+
+  if (!valid) return;
+
+  try {
+    const response = await fetch("http://localhost:3000/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: usernameValue,
+        email: emailValue,
+        password: passwordValue
+      })
+    });
+    console.log(response);
+    const data = await response.json();
+    console.log(data);
+    
+
+    if (response.ok) {
+      alert(data.message);
+      signUpForm.reset();
+    } else {
+      alert(data.error);
     }
-
-    if (!validateEmail(emailValue)){
-        signupEmailError.textContent = "Invalid email";
-        valid = false;
-
-    }
-
-    if (!validatePassword(passwordValue)){
-        signupPasswordError.textContent = "Invalid Password";
-        valid = false;
-    }
-
-    if (!valid) return;
-    alert("SignUp form submitted successfully")
-
-  signUpForm.reset();
-  usernameError.textContent = "";
-  signupEmailError.textContent = "";
-  signupPasswordError.textContent = "";
+  } catch (err) {
+    console.error(err);
+    alert("Server error");
+  }
 });
 
-loginForm.addEventListener("submit", (e) => {
+
+loginForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
   let valid = true;
@@ -92,12 +114,30 @@ loginForm.addEventListener("submit", (e) => {
 
   if (!valid) return;
 
-  alert("Login form submitted successfully!");
-  // loginForm.submit();  // Uncomment when connecting to backend
+  try {
+    const response = await fetch("http://localhost:3000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        email: emailValue,
+        password: passwordValue
+      })
+    });
 
-  loginForm.reset();
-  loginEmailError.textContent = "";
-  loginPasswordError.textContent = "";
+    const data = await response.json();
+
+    if (response.ok) {
+      alert(data.message);
+      loginForm.reset();
+    } else {
+      alert(data.error);
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Server error");
+  }
 });
 
 
