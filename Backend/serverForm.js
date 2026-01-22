@@ -9,6 +9,7 @@ import path from "path";
 dotenv.config()
 
 const app = express()
+//app.use(express.static(path.join(__dirname, "../frontend")));
 app.use(cors({origin:["http://127.0.0.1:5500"], allowedHeaders: "*"}))
 app.use(express.json())
 app.use(express.urlencoded ({extended: true}));
@@ -37,7 +38,7 @@ app.post("/signup", async (req, res) => {
     const user = new User({ username, email, password: hashedPassword });
     await user.save();
 
-    res.json({ message: "Signup successful" });
+    res.json({ message: "Signup successful", redirect: "/Frontend/chat.html" });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Server error" });
@@ -55,7 +56,7 @@ app.post("/login", async (req, res) => {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(401).json({ error: "Invalid password" });
 
-    res.json({ message: "Login successful" });
+    res.json({ message: "Login successful", redirect: "/Frontend/chat.html" });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Server error" });
