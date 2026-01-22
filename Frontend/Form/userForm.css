@@ -10,6 +10,33 @@ body{
     align-items: center;
     justify-content: center;
 }
+/* App Header */
+.app-header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px; 
+}
+
+.app-title {
+  font-size: 3rem; 
+  font-weight: bold;
+  color: #fff;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.4); 
+}
+
+.app-tagline {
+  font-size: 1.1rem;
+  color: #dad8d8;
+  margin-top: 5px;
+  text-shadow: 2px 2px 5px rgba(248, 246, 246, 0.3);
+}
+
 .wrapper{
     background: #fff;
     border-radius: 20px;
@@ -130,4 +157,51 @@ body{
     height: 12px;
     margin-top: 3px;
     display: block;
+}
+
+@media screen and (max-width: 768px) {
+    .wrapper {
+        flex-direction: column;
+        width: 90%;
+    }
+
+    .form-cont, .toggle-cont {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .app-title {
+        font-size: 2.5rem;
+    }
+
+    .app-tagline {
+        font-size: 1rem;
+    }
+
+    .form-cont input[type="text"],
+    .form-cont input[type="email"],
+    .form-cont input[type="password"] {
+        font-size: 0.95rem;
+    }
+
+    .form-cont button.submitbtn,
+    .toggle-cont button.switchbtn {
+        font-size: 0.9rem;
+        padding: 10px;
+    }
+}
+
+/* SMALLER PHONES */
+@media screen and (max-width: 480px) {
+    .app-title {
+        font-size: 2rem;
+    }
+
+    .app-tagline {
+        font-size: 0.9rem;
+    }
+
+    .form-cont h2 {
+        font-size: 1.2rem;
+    }
 }

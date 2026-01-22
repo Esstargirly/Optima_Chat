@@ -84,6 +84,7 @@ signUpForm.addEventListener("submit", async function (e) {
     if (response.ok) {
       alert(data.message);
       signUpForm.reset();
+      window.location.href = data.redirect;
     } else {
       alert(data.error);
     }
@@ -131,6 +132,7 @@ loginForm.addEventListener("submit", async (e) => {
     if (response.ok) {
       alert(data.message);
       loginForm.reset();
+      window.location.href = data.redirect;
     } else {
       alert(data.error);
     }
